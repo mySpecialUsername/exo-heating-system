@@ -8,8 +8,8 @@ import java.net.UnknownHostException;
 public class HeatingManagerImpl {
 	
 	public void manageHeating(String t, String threshold, boolean active){
-		double dT = new Double(t);
-		double dThreshold = new Double(threshold);
+		double dT = Double.parseDouble(t);
+		double dThreshold = Double.parseDouble(threshold);
 		manageHeating(dT, dThreshold, active);
 	}
 
