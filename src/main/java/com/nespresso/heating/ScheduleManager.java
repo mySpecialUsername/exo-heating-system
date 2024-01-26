@@ -31,7 +31,7 @@ public class ScheduleManager {
 
 	private static double fetchTemperature() 
 	throws NumberFormatException, MalformedURLException, IOException {
-		return Double.parseDouble(stringFromURL("http://timer.home:9990/start", 4));
+		return Double.parseDouble(stringFromURL("http://timer.home:9990/temp", 4));
 	}
 
 	private static int fetchStartHour() 
