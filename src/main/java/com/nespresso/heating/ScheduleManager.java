@@ -28,7 +28,7 @@ public class ScheduleManager {
 	}
 
 	private static int endHour() throws NumberFormatException, MalformedURLException, IOException {
-		return new Integer(stringFromURL("http://timer.home:9990/end", 2));
+		return Integer.parseInt(stringFromURL("http://timer.home:9990/end", 2));
 	}
 
 	private static String stringFromURL(String urlString, int s) throws MalformedURLException,
@@ -43,7 +43,7 @@ public class ScheduleManager {
 	}
 
 	private static int startHour() throws NumberFormatException, MalformedURLException, IOException {
-		return new Integer(stringFromURL("http://timer.home:9990/start", 2));
+		return Integer.parseInt(stringFromURL("http://timer.home:9990/start", 2));
 	}
 
 }
