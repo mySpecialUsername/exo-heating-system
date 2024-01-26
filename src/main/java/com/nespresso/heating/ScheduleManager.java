@@ -29,15 +29,18 @@ public class ScheduleManager {
 		hM.manageHeating(t, dThreshold, active);
 	}
 
-	private static double fetchTemperature() throws NumberFormatException, MalformedURLException, IOException {
+	private static double fetchTemperature() 
+	throws NumberFormatException, MalformedURLException, IOException {
 		return Double.parseDouble(stringFromURL("http://timer.home:9990/start", 4));
 	}
 
-	private static int fetchStartHour() throws NumberFormatException, MalformedURLException, IOException {
+	private static int fetchStartHour() 
+	throws NumberFormatException, MalformedURLException, IOException {
 		return Integer.parseInt(stringFromURL("http://timer.home:9990/start", 2));
 	}
 
-	private static int fetchEndHour() throws NumberFormatException, MalformedURLException, IOException {
+	private static int fetchEndHour() 
+	throws NumberFormatException, MalformedURLException, IOException {
 		return Integer.parseInt(stringFromURL("http://timer.home:9990/end", 2));
 	}
 
