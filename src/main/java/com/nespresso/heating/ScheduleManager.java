@@ -12,14 +12,9 @@ package com.nespresso.heating;
  */
 public class ScheduleManager {
 	
-	public static void manage(HeatingManagerImpl hM, String threshold) throws Exception {
+	public static void manage(Heater h, String threshold) throws Exception {
 		double dThreshold = Double.parseDouble(threshold);
-
-		double t = Probe.fetchTemperature();
-		
-		boolean active = Timer.isActive();
-
-		hM.manageHeating(t, dThreshold, active);
+		h.manageHeating( dThreshold);
 	}
 
 }

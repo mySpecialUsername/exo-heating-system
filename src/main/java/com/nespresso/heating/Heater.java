@@ -1,8 +1,10 @@
 package com.nespresso.heating;
 
-public class HeatingManagerImpl {
+public class Heater {
 	
-	public void manageHeating(double t, double threshold, boolean active) {
+	public void manageHeating(double threshold) throws Exception{
+		double t = Probe.fetchTemperature();
+		boolean active = Timer.isActive();
 		if (active)
 			if (t < threshold) {
 				switchState("on");
@@ -10,6 +12,7 @@ public class HeatingManagerImpl {
 				switchState("off");
 			}
 	}
+
 
 	public void switchState(String s){
 		Tools.writeToFile("heater.home", s);
