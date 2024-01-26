@@ -1,10 +1,5 @@
 package com.nespresso.heating;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.Socket;
-import java.net.UnknownHostException;
-
 public class HeatingManagerImpl {
 	
 	public void manageHeating(double t, double threshold, boolean active) {
@@ -17,19 +12,7 @@ public class HeatingManagerImpl {
 	}
 
 	public void switchState(String s){
-		try {
-			Socket socket = new Socket("heater.home", 9999);
-			OutputStream os = socket.getOutputStream();
-			os.write(s.getBytes());
-			os.flush();
-			os.close();
-			socket.close();
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Tools.writeToFile("heater.home", s);
 	}
 	
-
 }
