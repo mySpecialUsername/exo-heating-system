@@ -14,33 +14,28 @@ public class HeatingManagerImpl {
 	}
 
 	public void manageHeating(double t, double threshold, boolean active) {
-		if (t < threshold && active) {
-			try {
-				Socket socket = new Socket("heater.home", 9999);
-				OutputStream os = socket.getOutputStream();
-				os.write("on".getBytes());
-				os.flush();
-				os.close();
-				socket.close();
-			} catch (UnknownHostException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
+		if (active)
+			if (t < threshold) {
+				switchState("on");
+			} else {
+				switchState("off");
 			}
-		} else if (t > threshold && active) {
-			try {
-				Socket socket = new Socket("heater.home", 9999);
-				OutputStream os = socket.getOutputStream();
-				os.write("off".getBytes());
-				os.flush();
-				os.close();
-				socket.close();
-			} catch (UnknownHostException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+	}
+
+	public void switchState(String s){
+		try {
+			Socket socket = new Socket("heater.home", 9999);
+			OutputStream os = socket.getOutputStream();
+			os.write(s.getBytes());
+			os.flush();
+			os.close();
+			socket.close();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
+	
 
 }
