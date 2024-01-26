@@ -19,12 +19,9 @@ public class ScheduleManager {
 	
 	public static void manage(HeatingManagerImpl hM, String threshold) throws Exception {
 		String t = stringFromURL("http://probe.home:9990/temp", 4);
-		if(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) > startHour() && Calendar.getInstance().get(Calendar.HOUR_OF_DAY) < endHour()) {
-			hM.manageHeating(t, threshold, true);
-		} 
-		if(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) < startHour() || Calendar.getInstance().get(Calendar.HOUR_OF_DAY) > endHour()) {
-			hM.manageHeating(t, threshold, false);
-		}
+		int currentTime = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+		boolean active = (currentTime > startHour() && currentTime < endHour());
+		hM.manageHeating(t, threshold, active);
 	}
 
 	private static int endHour() throws NumberFormatException, MalformedURLException, IOException {
