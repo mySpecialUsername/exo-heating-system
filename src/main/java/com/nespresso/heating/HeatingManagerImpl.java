@@ -7,10 +7,14 @@ import java.net.UnknownHostException;
 
 public class HeatingManagerImpl {
 	
-	public void manageHeating(String t, String threshold, boolean active) {
+	public void manageHeating(String t, String threshold, boolean active){
 		double dT = new Double(t);
 		double dThreshold = new Double(threshold);
-		if (dT < dThreshold && active) {
+		manageHeating(dT, dThreshold, active);
+	}
+
+	public void manageHeating(double t, double threshold, boolean active) {
+		if (t < threshold && active) {
 			try {
 				Socket socket = new Socket("heater.home", 9999);
 				OutputStream os = socket.getOutputStream();
@@ -23,7 +27,7 @@ public class HeatingManagerImpl {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		} else if (dT > dThreshold && active) {
+		} else if (t > threshold && active) {
 			try {
 				Socket socket = new Socket("heater.home", 9999);
 				OutputStream os = socket.getOutputStream();
