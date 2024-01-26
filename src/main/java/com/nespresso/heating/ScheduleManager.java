@@ -18,15 +18,16 @@ import java.util.Calendar;
 public class ScheduleManager {
 	
 	public static void manage(HeatingManagerImpl hM, String threshold) throws Exception {
-		String t = stringFromURL("http://probe.home:9990/temp", 4);
+		double dThreshold = Double.parseDouble(threshold);
+
+		double t = fetchTemperature();
+		
 		int currentTime = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-		boolean active = (currentTime > startHour() && currentTime < endHour());
-		hM.manageHeating(t, threshold, active);
+		boolean active = (currentTime > fetchStartHour() && currentTime < fetchEndHour());
+
+		hM.manageHeating(t, dThreshold, active);
 	}
 
-	private static int endHour() throws NumberFormatException, MalformedURLException, IOException {
-		return Integer.parseInt(stringFromURL("http://timer.home:9990/end", 2));
-	}
 
 	private static String stringFromURL(String urlString, int s) throws MalformedURLException,
 			IOException {
@@ -39,8 +40,16 @@ public class ScheduleManager {
 		return t;
 	}
 
-	private static int startHour() throws NumberFormatException, MalformedURLException, IOException {
+
+	private static double fetchTemperature() throws NumberFormatException, MalformedURLException, IOException {
+		return Double.parseDouble(stringFromURL("http://timer.home:9990/start", 4));
+	}
+
+	private static int fetchStartHour() throws NumberFormatException, MalformedURLException, IOException {
 		return Integer.parseInt(stringFromURL("http://timer.home:9990/start", 2));
 	}
 
+	private static int fetchEndHour() throws NumberFormatException, MalformedURLException, IOException {
+		return Integer.parseInt(stringFromURL("http://timer.home:9990/end", 2));
+	}
 }
