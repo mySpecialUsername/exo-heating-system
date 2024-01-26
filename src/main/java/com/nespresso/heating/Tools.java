@@ -8,7 +8,7 @@ import java.net.Socket;
 import java.net.URL;
 import java.net.UnknownHostException;
 
-// those tools could be in separate classes too but I don't want to have too many files
+// These tools could be in separate classes too, but I don't want to have too many files
 public class Tools {
 	
     public static String stringFromURL(String urlString, int byteSize) 
