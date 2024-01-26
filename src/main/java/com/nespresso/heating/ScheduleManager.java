@@ -23,17 +23,18 @@ public class ScheduleManager {
 		double t = fetchTemperature();
 		
 		int currentTime = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+
 		boolean active = (currentTime > fetchStartHour() && currentTime < fetchEndHour());
 
 		hM.manageHeating(t, dThreshold, active);
 	}
 
 
-	private static String stringFromURL(String urlString, int s) throws MalformedURLException,
+	private static String stringFromURL(String urlString, int byteSize) throws MalformedURLException,
 			IOException {
 		URL url = new URL(urlString);
 		InputStream is = url.openStream();
-		byte[] tempBuffer = new byte[s];
+		byte[] tempBuffer = new byte[byteSize];
 		is.read(tempBuffer);
 		String t = new String(tempBuffer);
 		is.close();
