@@ -7,12 +7,6 @@ import java.net.UnknownHostException;
 
 public class HeatingManagerImpl {
 	
-	public void manageHeating(String t, String threshold, boolean active){
-		double dT = Double.parseDouble(t);
-		double dThreshold = Double.parseDouble(threshold);
-		manageHeating(dT, dThreshold, active);
-	}
-
 	public void manageHeating(double t, double threshold, boolean active) {
 		if (active)
 			if (t < threshold) {
